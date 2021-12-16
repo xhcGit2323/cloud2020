@@ -1,0 +1,44 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-center
+  cloud:
+    config:
+      server:
+        git:
+#          GitHub上的git仓库名
+#          ssh
+#          uri:  git@github.com:xhcGit2323/cloud-profiles.git
+#          http
+          uri:  https://github.com/xhcGit2323/cloud-profiles.git
+
+          #          搜索目录
+          search-paths:
+          - cloud-profiles
+#          username: xhcGit2323
+#          password: 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
+#          password: passwordGit23
+          skip-ssl-validation: true
+          force-pull: true
+      #      读取分支
+      label:  master
+
+eureka:
+  instance:
+    instance-id: configCenter3344
+    #    eureka页面超链接显示ip地址
+    prefer-ip-address: true
+    hostname: cloud-config-center #eureka服务端实例名称
+  client:
+    #    false表示不向注册中心注册自己
+    register-with-eureka: true
+    #    false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    fetch-registry: true
+    service-url:
+      #     设置与eureka server交互的地址查询服务和注册服务都需要依赖这个地址
+      defaultZone: http://localhost:7001/eureka
+
+
+
